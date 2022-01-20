@@ -1,0 +1,3 @@
+[submodule "atk_f"]
+	path = atk_f
+	url = https://github.com/atk1432/atk-frame.git
