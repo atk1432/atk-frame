@@ -12,13 +12,18 @@ class Server(BaseHTTPRequestHandler):
 
     def get_url(self):
         if URLS.get(self.path, False):
+            loader = URLS[self.path]()
+
             self.send_response(200)
             self.send_header('Content-type', 'text/html')
             self.end_headers()
-           # if URLS[self.path].__name__ == 'loader':
-            self.wfile.write(bytes("<html><head><title>My framework</title></head><body>", "utf-8"))
-            self.wfile.write(bytes("{}".format(URLS[self.path]()), "utf-8"))
-            self.wfile.write(bytes("</body></html>", "utf-8"))
+        
+            if type(loader).__name__ != 'main_l':
+                self.wfile.write(bytes("<html><head><title>My framework</title></head><body>", "utf-8"))
+                self.wfile.write(bytes("{}".format(loader), "utf-8"))
+                self.wfile.write(bytes("</body></html>", "utf-8"))
+            else:
+                self.wfile.write(bytes(loader(), 'utf-8'))
 
 
     def do_GET(self):

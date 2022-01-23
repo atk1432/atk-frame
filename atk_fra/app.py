@@ -27,6 +27,6 @@ class App:
 
 if __name__ == '__main__':
     def start():
-        return loader('templates/index.html')
+        return '<h1>Hello</h1>'
 
     App.listen('/', start)
